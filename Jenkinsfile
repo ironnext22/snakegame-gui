@@ -1,23 +1,30 @@
 pipeline {
     agent any
+
+    triggers {
+            pollSCM('* * * * *')
+        }
     stages {
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/ironnext22/snakegame-gui'
+            }
+        }
+
         stage('Build') {
             steps {
-                script {
-                    // Uruchom docker-compose
-                    bat 'docker-compose up --build'
-                }
+                sh 'docker-compose up --build'
             }
         }
-        stage('Test') {
-            steps {
 
-            }
+    }
+
+    post {
+        success {
+            echo 'Budowa zakończona sukcesem!.'
         }
-        stage('Deploy') {
-            steps {
-
-            }
+        failure {
+            echo 'Budowa nie powiodła się..'
         }
     }
 }
