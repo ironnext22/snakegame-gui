@@ -23,17 +23,15 @@ pipeline {
                 sh 'docker run pysnake-test'
             }
         }
-    stage('Collect') {
-        steps {
-        cleanWs()
-        git branch: "${GIT_BRANCH}", credentialsId: "${GIT_CRED_ID}", url: "${GIT_REPO}"
-        sh '''
-            chmod +x clear.sh
-            ./clear.sh
-        '''
+        stage('Collect') {
+            steps {
+            cleanWs()
+            git branch: "${GIT_BRANCH}", credentialsId: "${GIT_CRED_ID}", url: "${GIT_REPO}"
+            sh 'chmod +x clear.sh'
+            sh './clear.sh'
+            }
         }
     }
-}
 
     post {
         success {
