@@ -13,7 +13,14 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh 'docker-compose up --build'
+                sh 'docker build -t pysnake .'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'cd ./test'
+                sh 'docker build -t pysnake-test .'
+                sh 'docker run pysnake-test'
             }
         }
 
