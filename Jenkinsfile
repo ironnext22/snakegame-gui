@@ -5,6 +5,13 @@ pipeline {
             pollSCM('* * * * *')
         }
     stages {
+        stage('Collect') {
+            steps {
+                sh "docker container prune -f"
+                sh "docker image prune -af"
+            }
+        }
+        
         stage('Checkout') {
             steps {
                 git 'https://github.com/ironnext22/snakegame-gui'
@@ -14,6 +21,7 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'docker build -t pysnake .'
+                
             }
         }
         stage('Test') {
@@ -21,14 +29,6 @@ pipeline {
                 sh 'cd ./test'
                 sh 'docker build -t pysnake-test .'
                 sh 'docker run pysnake-test'
-            }
-        }
-        stage('Collect') {
-            steps {
-            cleanWs()
-            git branch: "${GIT_BRANCH}", credentialsId: "${GIT_CRED_ID}", url: "${GIT_REPO}"
-            sh 'chmod +x clear.sh'
-            sh './clear.sh'
             }
         }
     }
