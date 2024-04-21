@@ -31,7 +31,7 @@ pipeline {
                 sh 'cd ./test'
                 sh 'docker build -t pysnake-test .'
                 sh 'docker run --name="pysnake-test" pysnake-test'
-                sh 'docker logs pysnake-test > ./log/pysnake_test_log.txt'
+                sh 'docker logs pysnake-test > ./log/pysnake_deploy_log.txt'
             }
         }
         stage('Deploy'){
