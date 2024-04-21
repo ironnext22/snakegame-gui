@@ -36,7 +36,7 @@ pipeline {
         }
         stage('Deploy'){
             steps {
-                sh 'docker ps'
+                sh 'docker images'
                 sh 'cd ./deploy'
                 sh 'docker build -t pysnake-deploy .'
                 sh 'docker run --name="pysnake-deploy" pysnake-deploy'
