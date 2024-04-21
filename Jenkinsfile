@@ -34,7 +34,7 @@ pipeline {
                 sh 'docker logs pysnake-test > ./log/pysnake_test_log.txt'
             }
         }
-        stage('Test'){
+        stage('Deploy'){
             steps {
                 sh 'cd ./deploy'
                 sh 'docker build -t pysnake-deploy .'
