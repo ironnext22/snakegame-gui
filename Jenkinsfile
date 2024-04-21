@@ -22,7 +22,7 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'docker build -t pysnake .'
-                sh 'docker run --name="pysnake-test" pysnake'
+                sh 'docker run --name="pysnake" pysnake'
                 sh 'docker logs pysnake > ./log/pysnake_log.txt'
             }
         }
