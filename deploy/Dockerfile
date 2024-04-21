@@ -4,7 +4,7 @@ LABEL authors="wiktor"
 COPY --from=pysnake pysnake.py /app
 COPY --from=pysnake requirements.txt /app
 COPY --from=pysnake lib /app
-COPY --from=pysnake tests /app
+COPY  ../tests /app
 
 WORKDIR /app
 
