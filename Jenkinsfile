@@ -42,7 +42,7 @@ pipeline {
         }
         stage('Publish'){
             steps {
-                withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', usernameVariable: 'ironnext22', passwordVariable: 'KW132639/')]) {
+                withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
                     sh 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD'
                 }
                 sh 'docker tag pysnake-deploy $DOCKER_USERNAME/pysnake-deploy:latest'
