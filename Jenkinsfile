@@ -35,11 +35,14 @@ pipeline {
         }
         stage('Deploy'){
             steps {
-                sh 'docker images'
-                sh 'docker ps'
                 sh 'docker build -t pysnake-deploy ./deploy'
                 sh 'docker run --name pysnake-deploy pysnake-deploy'
                 sh 'docker logs pysnake-deploy > ./log/pysnake_test_log.txt'
+            }
+        }
+        stage('Publish'){
+            steps {
+                
             }
         }
     }
